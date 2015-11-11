@@ -4,7 +4,9 @@
 #include "stdafx.h"
 #include "StringPiece.h"
 #include "oatparser.h"
+#include <io.h>
 #include <string>
+#include <direct.h>
 
 static void usage() {
 	fprintf_s(stderr,
@@ -20,6 +22,25 @@ static void usage() {
 		"    --out-path=<file.dex>: specifies an out dex path.\n"
 		"       Example: --out-dex==F:\\androidL\\outdex \n"
 		"\n");
+}
+
+static bool IsDirExist(const std::string& outpath) {
+    bool ret = true;
+
+    if (-1 == _access(outpath.c_str(), 0) && errno == ENOENT) {
+        ret = false;
+    }
+
+    return ret;
+}
+
+static bool MakeDir(const std::string& outpath) {
+    bool ret = false;
+    if (0 == _mkdir(outpath.c_str())) {
+        ret = true;
+    }
+
+    return ret;
 }
 
 int main(int argc, char* argv[])
@@ -50,6 +71,10 @@ int main(int argc, char* argv[])
 		fprintf(stderr, "--oat-file and --out-path must be specified\n");
 		return false;
 	}
+
+    if (!IsDirExist(oat_todex_path)) {
+        MakeDir(oat_todex_path);
+    }
 
 	if (InitOatParser(oat_file.c_str(), oat_todex_path.c_str())) {
 		DoDumpToDex();

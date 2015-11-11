@@ -6,7 +6,7 @@
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LocalDebuggerCommandArguments>--oat-file="H:\androidL\framework\arm\wm.odex" --out-path="H:\androidL\framework\arm\out"</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>--oat-file="H:\androidL\framework\arm\wm.odex" --out-path="H:\androidL\framework\arm\test"</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
 </Project>
